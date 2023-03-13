@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import kodlama.io.Kodlama.io.Devs.business.abstracts.ProgrammingLanguageService;
+import kodlama.io.Kodlama.io.Devs.business.requests.language.CreateLanguagesRequest;
+import kodlama.io.Kodlama.io.Devs.business.requests.language.UpdateLanguagesRequest;
+import kodlama.io.Kodlama.io.Devs.business.responses.language.GetAllLanguageRespond;
 import kodlama.io.Kodlama.io.Devs.entities.concretes.ProgrammingLanguage;
 
 @RestController
@@ -27,8 +31,8 @@ public class ProgrammingLanguagesController {
 	}
 	
 	@PostMapping("/add/{name}") 
-	public void add(@RequestBody ProgrammingLanguage programmingLanguage,@PathVariable("name")String name) throws Exception{
-		programmingLanguageService.add(programmingLanguage,name);
+	public void add(@RequestBody CreateLanguagesRequest createLanguageRequest,@PathVariable("name")String name) throws Exception{
+		programmingLanguageService.add(createLanguageRequest,name);
 	}
 	@GetMapping("/getbyid/{id}")
 	public ProgrammingLanguage getById(@PathVariable("id")int id) {
@@ -37,9 +41,9 @@ public class ProgrammingLanguagesController {
 
 	}
 	@PutMapping("/update/{id}/{name}")
-	public void update( @RequestBody ProgrammingLanguage programmingLanguage,@PathVariable("id")int id,@PathVariable("name")String name) throws Exception {
+	public void update(UpdateLanguagesRequest updateLanguageRequest,@PathVariable("id")int id,@PathVariable("name")String name) throws Exception {
 		
-		programmingLanguageService.update(programmingLanguage,id,name);
+		programmingLanguageService.update(updateLanguageRequest,id,name);
 
 	}
 	@DeleteMapping("/delete/{id}")
@@ -49,7 +53,7 @@ public class ProgrammingLanguagesController {
 
 	}
 	@GetMapping("/getall")
-    public List<ProgrammingLanguage> getAll() {
+    public List<GetAllLanguageRespond> getAll() {
 
 		return programmingLanguageService.getAll();
 

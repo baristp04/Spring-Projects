@@ -1,16 +1,10 @@
 package kodlama.io.Kodlama.io.Devs.dataAccess.abstracts;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import kodlama.io.Kodlama.io.Devs.entities.concretes.ProgrammingLanguage;
 
-public interface ProgrammingLanguageDao {
+public interface ProgrammingLanguageDao extends JpaRepository<ProgrammingLanguage, Integer> {
 	
-	void add(ProgrammingLanguage programmingLanguage,String name);
-	ProgrammingLanguage getById(int id);
-	void update(ProgrammingLanguage programmingLanguage,int id,String name);
-	void delete(int id);
-	List <ProgrammingLanguage> getAll();
-
 
 }

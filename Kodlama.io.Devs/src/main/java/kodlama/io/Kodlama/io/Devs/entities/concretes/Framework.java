@@ -1,26 +1,25 @@
 package kodlama.io.Kodlama.io.Devs.entities.concretes;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "programmingLanguages")
+@Table(name = "frameworks")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class ProgrammingLanguage {
-
+public class Framework {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -29,7 +28,8 @@ public class ProgrammingLanguage {
 	@Column(name = "name")
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List <Framework> frameworks;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "language_id" , nullable = false)
+	private ProgrammingLanguage language;
 
 }
